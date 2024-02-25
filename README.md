@@ -1,3 +1,37 @@
+
+# MsQuic & wolfSSL
+
+***Supports wolfSSL***
+
+## Linux
+On Linux, MsQuic relies on OpenSSL for TLS 1.3 functionality. Both version 1.1 and 3.1 are supported. The libmsquic package will generally depend on the default OS installed OpenSSL version's libcrypto.
+> Important This configuration relies on a fork of OpenSSL for QUIC/TLS support. It is still currently unknown as to when mainline will support QUIC. See here for more details. MsQuic with OpenSSL does fully support 0-RTT.
+
+
+1. wolfSSL - OpenSSL Compatibility Layer
+* /wolfssl-5.6.6$ ./configure --enable-opensslall --enable-opensslextra --enable-quic --enable-pkcs7 --enable-earlydata --enable-session-ticket --enable-static --enable-certgen --enable-certreq
+
+2. Status - \src\platform\tls_openssl.c
+
+Below functions are missing.
+* PKCS7_set_type
+* PKCS7_content_new
+* PKCS7_add_certificate
+* SSL_client_hello_get0_ext
+* PEM_write_bio_SSL_SESSION
+* SSL_SESSION_get0_ticket_appdata
+* SSL_CTX_set_session_ticket_cb
+* SSL_CTX_clear_options
+* SSL_CTX_set_client_hello_cb
+* PEM_read_bio_SSL_SESSION
+* SSL_SESSION_set1_ticket_appdata
+* SSL_new_session_ticket
+* SSL_CIPHER_get_protocol_id
+
+
+
+
+
 <h1 align="center"><img src="docs/images/readme_logo.png" width="500" alt="MsQuic logo"/></h1>
 
 [![Documentation](https://img.shields.io/static/v1?label=Documentation&message=Dashboard&color=blue)](https://microsoft.github.io/msquic/msquicdocs/docs/API.html)
